@@ -5,10 +5,13 @@ import cors from "cors"
 import cookieParser from "cookie-parser"
 
 const app = express();
-app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials: true
-}))
+app.use(
+    cors({
+      origin: ["http://localhost:5173", "https://skillflow-frontend-client.onrender.com"], // Allow both local and deployed frontend
+      methods: ["GET", "POST", "PUT", "DELETE"],
+      credentials: true,
+    })
+  );
 app.use(express.json())
 app.use(cookieParser())
 
@@ -23,3 +26,9 @@ app.use("/api/v1/course", courseRouter)
 
 
 export default app
+
+/* 
+
+Deploy link: https://skillflow-frontend-client-lms.onrender.com/
+
+*/
