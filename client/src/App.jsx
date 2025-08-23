@@ -51,7 +51,7 @@ const appRouter = createBrowserRouter([
           //   element: <Dashboard />
           },
           {
-            path: "course",
+            path: "course", 
             element: <CourseTable />
           },
           {

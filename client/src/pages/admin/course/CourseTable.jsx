@@ -17,7 +17,8 @@ import { Badge } from '@/components/ui/badge'
 
 
 const CourseTable = () => {
-    const { data, isLoading, refetch } = useGetCreatorCourseQuery()
+    const { data, isLoading, refetch } = useGetCreatorCourseQuery();
+    console.log(data);
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -33,7 +34,7 @@ const CourseTable = () => {
             <Button onClick={() => navigate(`create`)}>Create a new course</Button>
             <Table>
                 <TableCaption>A list of your recent courses.</TableCaption>
-                <TableHeader>
+                <TableHeader> 
                     <TableRow>
                         <TableHead className="w-[100px]">Price</TableHead>
                         <TableHead>Status</TableHead>
@@ -42,7 +43,7 @@ const CourseTable = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {data.courses.map((course) => (
+                    {data?.courses.map((course) => (
                         <TableRow key={course._id}>
                             <TableCell>₹{course?.coursePrice || "NA"}</TableCell>
                             <TableCell> <Badge>{course?.isPublished ? "Published" : "Draft"}</Badge> </TableCell>

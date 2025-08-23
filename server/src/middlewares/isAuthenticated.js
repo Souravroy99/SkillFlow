@@ -8,14 +8,14 @@ export const isAuthenticated = async (req, res, next) => {
                 success: false,
                 message: "User is not authenticated"
             })
-    }
+        }
 
         const decode = jwt.verify(token, process.env.JWT_SECRET)
-        if(!decode) {
+        if (!decode) {
             return res.status(401).json({
                 success: false,
                 message: "Invalid token"
-           })
+            })
         }
 
         req.id = decode.userId
