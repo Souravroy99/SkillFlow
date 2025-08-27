@@ -11,7 +11,7 @@ import LoadingSpinner from './components/LoadingSpinner'
 const Custom = ({ children }) => {
   const { isLoading } = useLoadUserQuery()
   return (
-    <>
+    <> 
       {
         isLoading ? <LoadingSpinner></LoadingSpinner> : <>{children}</>
       }
@@ -22,10 +22,10 @@ const Custom = ({ children }) => {
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={appStore}>
-      <Custom>
+      {/* <Custom> */}
         <App />
-        <Toaster />
-      </Custom>
+        {/* <Toaster /> */}
+      {/* </Custom> */}
     </Provider>
   </StrictMode>,
 )
