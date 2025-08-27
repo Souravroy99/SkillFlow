@@ -12,4 +12,4 @@ const rootRedcuer = combineReducers({
     // [courseProgressApi.reducerPath]:courseProgressApi.reducer,
     auth:authReducer, 
 });
-export default rootRedcuer;
+export default rootRedcuer; 

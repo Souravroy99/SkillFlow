@@ -23,7 +23,7 @@ const Courses = () => {
                         ))
                     ) :
                         courses.map((course, idx) =>
-                            <Course />
+                            <Course key={idx} />
                         )
                     }
 

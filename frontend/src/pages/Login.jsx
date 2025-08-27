@@ -25,7 +25,7 @@ const Login = () => {
 
   const [
     registerUser,
-    { 
+    {
       data: registerData,
       error: registerError,
       isLoading: registerIsLoading,
@@ -34,7 +34,7 @@ const Login = () => {
   ] = useRegisterUserMutation();
   const [
     loginUser,
-    { 
+    {
       data: loginData,
       error: loginError,
       isLoading: loginIsLoading,
@@ -58,22 +58,22 @@ const Login = () => {
     const action = type === "signup" ? registerUser : loginUser;
     await action(inputData);
   };
-
+ 
   useEffect(() => {
     if (registerIsSuccess && registerData) {
-      toast.success(registerData.message || "Signup successful.") ;
+      toast.success(registerData.message || "Signup successful.");
       navigate("/");
     }
     if (registerError) {
-      toast.error(registerError?.data?.message || "Signup Failed") ;
+      toast.error(registerError?.data?.message || "Signup Failed");
     }
     if (loginIsSuccess && loginData) {
-      toast.success(loginData.message || "Login successful.") ;
+      toast.success(loginData.message || "Login successful.");
       navigate("/");
     }
     if (loginError) {
-        toast.error(loginError?.data?.message || "Login Failed") ;
-        navigate("/login") ;
+      toast.error(loginError?.data?.message || "Login Failed");
+      navigate("/login");
     }
   }, [
     loginIsSuccess,
@@ -111,7 +111,7 @@ const Login = () => {
                   placeholder="Eg. Sourav"
                   required
                 />
-              </div> 
+              </div>
               <div className="space-y-1">
                 <Label htmlFor="username">Email</Label>
                 <Input

@@ -4,8 +4,6 @@ import express from "express"
 import cors from "cors"
 import cookieParser from "cookie-parser"
  
-console.log(process.env.CORS_ORIGIN);
-
 const app = express();
 const corsOptions = {
     // ["http://localhost:5173", 'https://frontend-skillflow.onrender.com'], // Allow both local and deployed frontend

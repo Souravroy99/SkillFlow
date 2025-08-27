@@ -12,7 +12,7 @@ import {
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import DarkMode from "@/DarkMode";
-
+ 
 import {
     Sheet,
     SheetClose,
@@ -87,7 +87,7 @@ const Navbar = () => {
                                     </DropdownMenuItem>
                                     <DropdownMenuItem>
                                         {" "}
-                                        <Link to="profile">Edit Profile</Link>{" "}
+                                        {/* <Link to="profile">Edit Profile</Link>{" "} */}
 
                                     </DropdownMenuItem>
                                     <DropdownMenuItem
@@ -159,7 +159,7 @@ const MobileNavbar = ({ user }) => {
                 {/* <Separator className="mr-2" /> */}
                 <nav className="flex flex-col space-y-4">
                     <Link to="/my-learning">My Learning</Link>
-                    <Link to="/profile">Edit Profile</Link>
+                    {/* <Link to="/profile">Edit Profile</Link> */}
                     <button onClick={logoutHandler} >Log out</button>
 
                 </nav>
