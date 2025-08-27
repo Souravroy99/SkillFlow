@@ -22,8 +22,8 @@ const appRouter = createBrowserRouter([
         path: '/',
         element: (
           <>
-            <HeroSection />
-            <Courses />
+            {/* <HeroSection /> */}
+            {/* <Courses /> */}
           </>
         )
       },

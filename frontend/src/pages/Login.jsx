@@ -25,7 +25,7 @@ const Login = () => {
 
   const [
     registerUser,
-    {
+    { 
       data: registerData,
       error: registerError,
       isLoading: registerIsLoading,
@@ -34,7 +34,7 @@ const Login = () => {
   ] = useRegisterUserMutation();
   const [
     loginUser,
-    {
+    { 
       data: loginData,
       error: loginError,
       isLoading: loginIsLoading,
@@ -109,9 +109,9 @@ const Login = () => {
                   value={signupInput.name}
                   onChange={(e) => changeInputHandler(e, "signup")}
                   placeholder="Eg. Sourav"
-                  required="true"
+                  required
                 />
-              </div>
+              </div> 
               <div className="space-y-1">
                 <Label htmlFor="username">Email</Label>
                 <Input
@@ -120,7 +120,7 @@ const Login = () => {
                   value={signupInput.email}
                   onChange={(e) => changeInputHandler(e, "signup")}
                   placeholder="Eg. souravroy@gmail.com"
-                  required="true"
+                  required
                 />
               </div>
               <div className="space-y-1">
@@ -131,7 +131,7 @@ const Login = () => {
                   value={signupInput.password}
                   onChange={(e) => changeInputHandler(e, "signup")}
                   placeholder="Eg. xyz123"
-                  required="true"
+                  required
                 />
               </div>
             </CardContent>
@@ -169,7 +169,7 @@ const Login = () => {
                   value={loginInput.email}
                   onChange={(e) => changeInputHandler(e, "login")}
                   placeholder="Eg. souravroy@gmail.com"
-                  required="true"
+                  required
                 />
               </div>
               <div className="space-y-1">
@@ -180,7 +180,7 @@ const Login = () => {
                   value={loginInput.password}
                   onChange={(e) => changeInputHandler(e, "login")}
                   placeholder="Eg. xyz123"
-                  required="true"
+                  required
                 />
               </div>
             </CardContent>
