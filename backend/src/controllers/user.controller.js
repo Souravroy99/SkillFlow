@@ -1,4 +1,5 @@
 import { User } from "../models/user.model.js"
+import { deleteMediaFromCloudinary, uploadOnCloudinary } from "../utils/cloudinary.js"
 
 export const register = async(req, res) => {
     try {
@@ -64,6 +65,70 @@ export const login = async (req, res) => {
             })
     } 
     catch (error) {
-        return res.status(500).json({success: false, message: "Failed to Login", error})
+        return res.status(500).json({success: false, message: "Failed to login", error})
+    }
+}
+
+export const logout = async(req, res) => {
+    try {       
+        const options = { 
+            httpOnly: true,
+            secure: true,
+            maxAge: 0 
+        }
+
+        return res
+                .status(200)
+                .cookie("token", "", options)
+                .json({success: true, message: "User logout successfully"})
+    } 
+    catch (error) {
+        return res.status(500).json({success: false, message: "Failed to logout", error: error.message})
+    }
+}
+
+// Fetch user profile iff the user is logged in
+export const getUserProfile = async(req, res) => {
+    try {
+        return res.status(200).json({success: true, message: "User found", user: req.user})
+    } 
+    catch (error) {
+        return res.status(500).json({success: false, message: "Failed to fetch user profile", error: error.message})
+    }
+}
+
+export const updateProfile = async(req, res) => {
+    try {
+        const { name } = req.body
+        const user = req.user
+        const profilePhotoLocalPath = req.file?.path 
+
+        if(user.photoUrl) {
+            const publicId = user.photoUrl.split("/").pop().split(".")[0]
+            await deleteMediaFromCloudinary(publicId)
+        }
+
+        let photoRes ;
+        if(profilePhotoLocalPath) {
+            photoRes = await uploadOnCloudinary(profilePhotoLocalPath)
+        }
+
+        const updateData = { name }
+        if(photoRes?.url) {
+            updateData.photoUrl = photoRes.url
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(user._id, updateData, {new: true}). select("-password")  // {new: true} --> This will pass the update user from DB
+
+        return res
+            .status(200)
+            .json({
+                success: true,
+                message: "Profile successfully updated",
+                user: updatedUser
+            })
+    } 
+    catch (error) {
+        return res.status(500).json({success: false, message: "Failed to update profile", error: error.message})
     }
 }

@@ -25,7 +25,7 @@ const Courses = () => {
                         courses.map((course, idx) =>
                             <Course key={idx} />
                         )
-                    }
+                    } 
 
                 </div>
             </div>

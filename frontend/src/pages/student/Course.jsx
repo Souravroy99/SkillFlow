@@ -30,7 +30,7 @@ const Course = ({course}) => {
           <Badge className={'bg-blue-600 text-white px-2 py-1 text-xs rounded-full'}>
             Advance
           </Badge>
-        </div>
+        </div> 
         <div className="text-lg font-bold">
             <span>₹999</span>
         </div>

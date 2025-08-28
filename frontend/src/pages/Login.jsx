@@ -65,14 +65,14 @@ const Login = () => {
       navigate("/");
     }
     if (registerError) {
-      toast.error(registerError?.data?.message || "Signup Failed");
+      toast.error(registerError.data.message || "Signup Failed");
     }
     if (loginIsSuccess && loginData) {
       toast.success(loginData.message || "Login successful.");
       navigate("/");
     }
     if (loginError) {
-      toast.error(loginError?.data?.message || "Login Failed");
+      toast.error(loginError.data.message || "Login Failed");
       navigate("/login");
     }
   }, [

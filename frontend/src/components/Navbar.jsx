@@ -12,7 +12,7 @@ import {
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import DarkMode from "@/DarkMode";
- 
+
 import {
     Sheet,
     SheetClose,
@@ -30,9 +30,8 @@ import { useSelector } from "react-redux";
 
 const Navbar = () => {
     const { user } = useSelector(store => store.auth)
-    const role = "instructor"
 
-    //   useSelector((store) => store.auth);
+    useSelector((store) => store.auth);
     const navigate = useNavigate();
 
     const [logoutUser, { data, isSuccess }] = useLogoutUserMutation();
@@ -42,7 +41,7 @@ const Navbar = () => {
 
     useEffect(() => {
         if (isSuccess) {
-            toast.success(data?.message || "User log out.");
+            toast.success(data?.message || "User logged out.");
             navigate("/login");
         }
     }, [isSuccess]);
@@ -87,7 +86,7 @@ const Navbar = () => {
                                     </DropdownMenuItem>
                                     <DropdownMenuItem>
                                         {" "}
-                                        {/* <Link to="profile">Edit Profile</Link>{" "} */}
+                                        <Link to="profile">Edit Profile</Link>{" "}
 
                                     </DropdownMenuItem>
                                     <DropdownMenuItem
@@ -135,7 +134,7 @@ const MobileNavbar = ({ user }) => {
 
     useEffect(() => {
         if (isSuccess) {
-            toast.success(data?.message || "User log out.");
+            toast.success(data?.message || "User logged out.");
             navigate("/login");
         }
     }, [isSuccess]);
@@ -159,7 +158,7 @@ const MobileNavbar = ({ user }) => {
                 {/* <Separator className="mr-2" /> */}
                 <nav className="flex flex-col space-y-4">
                     <Link to="/my-learning">My Learning</Link>
-                    {/* <Link to="/profile">Edit Profile</Link> */}
+                    <Link to="/profile">Edit Profile</Link>
                     <button onClick={logoutHandler} >Log out</button>
 
                 </nav>
@@ -167,7 +166,7 @@ const MobileNavbar = ({ user }) => {
                 {user?.role === "instructor" && (
                     <SheetFooter>
                         <SheetClose asChild>
-                            {user.role === "instructor" && (
+                            {user?.role === "instructor" && (
 
                                 <Button type="submit">
                                     {/* onClick={() => navigate("/admin/dashboard")}> */}
@@ -180,5 +179,4 @@ const MobileNavbar = ({ user }) => {
             </SheetContent>
         </Sheet>
     );
-};
-
+};  
