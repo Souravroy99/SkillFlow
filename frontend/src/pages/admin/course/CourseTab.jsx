@@ -94,13 +94,12 @@ const CourseTab = () => {
     // Get File
     const selectThumbnail = (e) => {
         const file = e.target.files?.[0];
-        console.log(` --> `, file);
+
         if (file) {
             setInput({ ...input, courseThumbnail: file });
             const fileReader = new FileReader();
             fileReader.onloadend = () => setPreviewThumbnail(fileReader.result);
             fileReader.readAsDataURL(file);
-
         }
     };
 

@@ -80,10 +80,10 @@ const CreateLecture = () => {
                             <p>Loading lecture...</p>
                         ) : lectureError ? (
                             <p>Failed to load lectures...</p>
-                        ) : lectureData.length === 0 ? (
+                        ) : lectureData?.length === 0 ? (
                             <p>No lectures available</p>
                         ) : (
-                            lectureData.lectures.map((lecture,index) => (
+                            lectureData?.lectures.map((lecture,index) => (
 
                                 <Lecture key={lecture._id} index={index} lecture={lecture} />
                             ))
