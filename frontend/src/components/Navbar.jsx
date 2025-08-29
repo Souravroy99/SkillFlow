@@ -1,5 +1,5 @@
-import { Menu, School } from "lucide-react";
-import React, { useEffect } from "react";
+import { Menu, School } from "lucide-react"
+import React, { useEffect } from "react"
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -8,10 +8,10 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import { Button } from "./ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import DarkMode from "@/DarkMode";
+} from "./ui/dropdown-menu"
+import { Button } from "./ui/button"
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
+import DarkMode from "@/DarkMode"
 
 import {
     Sheet,
@@ -21,30 +21,30 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger,
-} from "./ui/sheet";
-// import { Separator } from "@radix-ui/react-dropdown-menu";
-import { Link, useNavigate } from "react-router-dom";
-import { useLogoutUserMutation } from "@/features/api/authApi";
-import { toast } from "sonner";
-import { useSelector } from "react-redux";
+} from "./ui/sheet"
+// import { Separator } from "@radix-ui/react-dropdown-menu"
+import { Link, useNavigate } from "react-router-dom"
+import { useLogoutUserMutation } from "@/features/api/authApi"
+import { toast } from "sonner"
+import { useSelector } from "react-redux"
 
 const Navbar = () => {
     const { user } = useSelector(store => store.auth)
 
-    useSelector((store) => store.auth);
-    const navigate = useNavigate();
+    useSelector((store) => store.auth)
+    const navigate = useNavigate()
 
-    const [logoutUser, { data, isSuccess }] = useLogoutUserMutation();
+    const [logoutUser, { data, isSuccess }] = useLogoutUserMutation()
     const logoutHandler = async () => {
-        await logoutUser();
-    };
+        await logoutUser()
+    }
 
     useEffect(() => {
         if (isSuccess) {
-            toast.success(data?.message || "User logged out.");
-            navigate("/login");
+            toast.success(data?.message || "User logged out.")
+            navigate("/login")
         }
-    }, [isSuccess]);
+    }, [isSuccess])
 
     return (
         <div className="h-16 dark:bg-[#020817] bg-white border-b dark:border-b-gray-800 border-b-gray-200 fixed top-0 left-0 right-0 duration-300 z-10">
@@ -120,24 +120,24 @@ const Navbar = () => {
                 <MobileNavbar user={user} />
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Navbar;
+export default Navbar
 
 const MobileNavbar = ({ user }) => {
-    const navigate = useNavigate();
-    const [logoutUser, { data, isSuccess }] = useLogoutUserMutation();
+    const navigate = useNavigate()
+    const [logoutUser, { data, isSuccess }] = useLogoutUserMutation()
     const logoutHandler = async () => {
-        await logoutUser();
-    };
+        await logoutUser()
+    }
 
     useEffect(() => {
         if (isSuccess) {
-            toast.success(data?.message || "User logged out.");
-            navigate("/login");
+            toast.success(data?.message || "User logged out.")
+            navigate("/login")
         }
-    }, [isSuccess]);
+    }, [isSuccess])
 
     return (
         <Sheet>
@@ -178,5 +178,5 @@ const MobileNavbar = ({ user }) => {
                 )}
             </SheetContent>
         </Sheet>
-    );
-};  
+    )
+}  

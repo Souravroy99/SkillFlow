@@ -43,7 +43,7 @@ const CreateLecture = () => {
                     Enter the lecture title and necessary stuffs.
                 </p>
 
-            </div>
+            </div> 
 
             <div className="space-y-4">
                 <div>

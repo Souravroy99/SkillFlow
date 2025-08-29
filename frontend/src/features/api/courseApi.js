@@ -55,5 +55,5 @@ export const courseApi = createApi({
     })
 })
 
-
+ 
 export const { useCreateCourseMutation, useGetCreatorCourseQuery, useEditCourseMutation, useGetCourseByIdQuery, useCreateLectureMutation, useGetCourseLecturesQuery } = courseApi

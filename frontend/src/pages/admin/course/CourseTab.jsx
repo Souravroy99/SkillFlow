@@ -1,14 +1,14 @@
-import RichTextEditor from "@/components/RichTextEditor";
-import { Button } from "@/components/ui/button";
+import RichTextEditor from "@/components/RichTextEditor"
+import { Button } from "@/components/ui/button"
 import {
     Card,
     CardContent,
     CardDescription,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+} from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import {
     Select,
     SelectContent,
@@ -17,16 +17,16 @@ import {
     SelectLabel,
     SelectTrigger,
     SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/select"
 import {
     useEditCourseMutation,
     useGetCourseByIdQuery,
     //   usePublishCourseMutation,
-} from "@/features/api/courseApi";
-import { Loader2 } from "lucide-react";
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "sonner";
+} from "@/features/api/courseApi"
+import { Loader2 } from "lucide-react"
+import React, { useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
+import { toast } from "sonner"
 
 const CourseTab = () => {
 
@@ -38,15 +38,15 @@ const CourseTab = () => {
         courseLevel: "",
         coursePrice: "",
         courseThumbnail: "",
-    });
+    })
 
-    const params = useParams();
-    const courseId = params.courseId;
+    const params = useParams()
+    const courseId = params.courseId
 
     const { data: courseByIdData, isLoading: courseByIdLoading, refetch } =
-        useGetCourseByIdQuery(courseId);
+        useGetCourseByIdQuery(courseId)
 
-    // const [publishCourse, {}] = usePublishCourseMutation();
+    // const [publishCourse, {}] = usePublishCourseMutation()
 
     useEffect(() => {
         refetch()
@@ -54,93 +54,92 @@ const CourseTab = () => {
 
 
     useEffect(() => {
-        const course = courseByIdData?.course;
+        const course = courseByIdData?.course
 
         if (course) {
-
             setInput((prevInput) => ({
                 ...prevInput,
-                courseTitle: course.courseTitle,
-                subTitle: course.subTitle,
-                description: course.description,
-                category: course.category,
-                courseLevel: course.courseLevel,
-                coursePrice: course.coursePrice,
-                courseThumbnail: course.courseThumbnail,
-            }));
+                courseTitle: course?.courseTitle,
+                subTitle: course?.subTitle,
+                description: course?.description,
+                category: course?.category,
+                courseLevel: course?.courseLevel,
+                coursePrice: course?.coursePrice,
+                courseThumbnail: course?.courseThumbnail,
+            }))
         }
-    }, [courseByIdData]);
+    }, [courseByIdData])
 
-    console.log(input);
+    console.log(input)
 
-    const [previewThumbnail, setPreviewThumbnail] = useState("");
-    const navigate = useNavigate();
+    const [previewThumbnail, setPreviewThumbnail] = useState("")
+    const navigate = useNavigate()
 
-    const [editCourse, { data, isLoading, isSuccess, error }] = useEditCourseMutation();
+    const [editCourse, { data, isLoading, isSuccess, error }] = useEditCourseMutation()
 
 
     const changeEventHandler = (e) => {
-        const { name, value } = e.target;
-        setInput({ ...input, [name]: value });
-    };
+        const { name, value } = e.target
+        setInput({ ...input, [name]: value })
+    }
 
     const selectCategory = (value) => {
-        setInput({ ...input, category: value });
-    };
+        setInput({ ...input, category: value })
+    }
     const selectCourseLevel = (value) => {
-        setInput({ ...input, courseLevel: value });
-    };
+        setInput({ ...input, courseLevel: value })
+    }
 
     // Get File
     const selectThumbnail = (e) => {
-        const file = e.target.files?.[0];
+        const file = e.target.files?.[0]
 
         if (file) {
-            setInput({ ...input, courseThumbnail: file });
-            const fileReader = new FileReader();
-            fileReader.onloadend = () => setPreviewThumbnail(fileReader.result);
-            fileReader.readAsDataURL(file);
+            setInput({ ...input, courseThumbnail: file })
+            const fileReader = new FileReader()
+            fileReader.onloadend = () => setPreviewThumbnail(fileReader.result)
+            fileReader.readAsDataURL(file)
         }
-    };
+    }
 
     const updateCourseHandler = async () => {
-        const formData = new FormData();
-        formData.append("courseTitle", input.courseTitle);
-        formData.append("subTitle", input.subTitle);
-        formData.append("description", input.description);
-        formData.append("category", input.category);
-        formData.append("courseLevel", input.courseLevel);
-        formData.append("coursePrice", input.coursePrice);
-        formData.append("courseThumbnail", input.courseThumbnail);
+        const formData = new FormData()
+        formData.append("courseTitle", input.courseTitle)
+        formData.append("subTitle", input.subTitle)
+        formData.append("description", input.description)
+        formData.append("category", input.category)
+        formData.append("courseLevel", input.courseLevel)
+        formData.append("coursePrice", input.coursePrice)
+        formData.append("courseThumbnail", input.courseThumbnail)
 
-        await editCourse({ formData, courseId });
-    };
+        await editCourse({ formData, courseId })
+    }
 
     //   const publishStatusHandler = async (action) => {
     //     try {
-    //       const response = await publishCourse({courseId, query:action});
+    //       const response = await publishCourse({courseId, query:action})
     //       if(response.data){
-    //         refetch();
-    //         toast.success(response.data.message);
+    //         refetch()
+    //         toast.success(response.data.message)
     //       }
     //     } catch (error) {
-    //       toast.error("Failed to publish or unpublish course");
+    //       toast.error("Failed to publish or unpublish course")
     //     }
-    //   }
+    //   } 
 
     useEffect(() => {
         if (isSuccess) {
-            toast.success(data.message || "Course update.");
+            toast.success(data.message || "Course update.")
         }
         if (error) {
-            toast.error(error.data.message || "Failed to update course");
+            toast.error(error.data.message || "Failed to update course")
         }
-    }, [isSuccess, error]);
+    }, [isSuccess, error])
 
     if (courseByIdLoading) {
         return (
             <div className="flex justify-center items-center h-screen"><Loader2 className="h-10 w-10 animate-spin text-blue-500" /></div>
-        );
+        )
     }
 
     const isPublished = true
@@ -297,7 +296,7 @@ const CourseTab = () => {
                 </div>
             </CardContent>
         </Card>
-    );
-};
+    )
+}
 
-export default CourseTab;
+export default CourseTab

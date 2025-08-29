@@ -107,7 +107,7 @@ export const updateProfile = async(req, res) => {
             const publicId = user.photoUrl.split("/").pop().split(".")[0]
             await deleteMediaFromCloudinary(publicId)
         }
-
+ 
         let photoRes ;
         if(profilePhotoLocalPath) {
             photoRes = await uploadOnCloudinary(profilePhotoLocalPath)
