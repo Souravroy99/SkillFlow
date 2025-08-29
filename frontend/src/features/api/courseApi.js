@@ -45,7 +45,7 @@ export const courseApi = createApi({
                 method: "POST",
                 body: {lectureTitle}
             })
-        }),
+        }), 
         getCourseLectures: builder.query({
             query: (courseId) => ({
                 url: `/${courseId}/lecture`,

@@ -11,7 +11,7 @@ import Lecture from './Lecture'
 const CreateLecture = () => {
     const [lectureTitle, setLectureTitle] = useState("")
     const navigate = useNavigate()
-
+ 
     const params = useParams();
     const courseId = params.courseId
 
@@ -55,7 +55,6 @@ const CreateLecture = () => {
                         placeholder="Your Title Name"
                     />
                 </div>
-
 
 
                 <div className="flex items-center gap-2">

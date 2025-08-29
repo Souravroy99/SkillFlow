@@ -11,14 +11,15 @@ const courseSchema = new mongoose.Schema(
         coursePrice: Number,
         category: {
             type: String,
-            required: true
-        },
+            required: true 
+        },  
         courseLevel: {
             type: String,
             enum: ["Beginner", "Medium", "Advanced"]
         },
-        courseThumbnail: String,
+        courseThumbnail: String, // Thumbnail URL
         enrolledStudents: [
+            // We can do 'populate' due to 'ref'
             {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "User"

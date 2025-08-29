@@ -1,9 +1,9 @@
 import mongoose from 'mongoose'
-
+ 
 const lectureSchema = new mongoose.Schema(
     {
         lectureTitle: {
-            type: String,
+            type: String, 
             required: true
         },
         videoUrl: String,
