@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-// import LectureTab from "./LectureTab";
+import LectureTab from "./LectureTab";
  
 const EditLecture = () => {
   const params = useParams();
@@ -19,7 +19,7 @@ const EditLecture = () => {
           <h1 className="font-bold text-xl">Update Your Lecture</h1>
         </div>
       </div>
-      {/* <LectureTab /> */}
+      <LectureTab />
     </div>
   );
 };

@@ -6,4 +6,4 @@ const router = express.Router()
 
 router.route('/upload-video').post(upload.single("file"), uploadVideo)
 
-export default router
+export default router   

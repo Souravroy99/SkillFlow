@@ -9,7 +9,7 @@ export const authApi = createApi({
         baseUrl:USER_API,
         credentials:'include'
     }),
-    endpoints: (builder) => ({
+    endpoints: (builder) => ({ 
         registerUser: builder.mutation({
             query: (inputData) => ({
                 url:"register",

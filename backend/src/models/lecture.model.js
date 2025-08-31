@@ -9,7 +9,7 @@ const lectureSchema = new mongoose.Schema(
         videoUrl: String,
         publicId: String,
         isPreviewFree: Boolean 
-    }, 
+    },  
     {
         timestamps: true
     }

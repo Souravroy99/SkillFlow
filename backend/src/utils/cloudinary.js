@@ -15,7 +15,7 @@ export const uploadOnCloudinary = async (localFilePath) => {
             console.log("Local File Path is not found!");
             return null ;
         } 
-   
+    
         const uploadResult = await cloudinary.uploader.upload(localFilePath, {
             resource_type: 'auto'
         })

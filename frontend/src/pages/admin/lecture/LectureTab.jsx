@@ -10,18 +10,18 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { Switch } from "@/components/ui/switch";
-import { useEditLectureMutation, useRemoveLectureMutation, useGetLectureByIdQuery } from "@/features/api/courseApi";
+import { useEditLectureMutation, useGetLectureByIdQuery, useRemoveLectureMutation  } from "@/features/api/courseApi"; 
 import axios from "axios";
 import { Loader2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner"; 
+  
+const MEDIA_API = "http://localhost:7001/api/v1/media";
  
-const MEDIA_API = "http://localhost:3001/api/v1/media";
-
 const LectureTab = () => {
     const [lectureTitle, setLectureTitle] = useState("");
-    const [uploadVideInfo, setUploadVideoInfo] = useState(null);
+    const [uploadVideoInfo, setUploadVideoInfo] = useState(null);
     const [isFree, setIsFree] = useState(false);
     const [mediaProgress, setMediaProgress] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
@@ -30,9 +30,11 @@ const LectureTab = () => {
     const params = useParams();
     const { courseId, lectureId } = params;
 
-    const [edtiLecture, { data, isLoading, error, isSuccess }] = useEditLectureMutation();
+    const [editLecture, { data, isLoading, error, isSuccess }] = useEditLectureMutation();
     const [removeLecture, { data: removeData, isLoading: removeLoading,isSuccess: removeSuccess }] = useRemoveLectureMutation();
+
     const { data: lectureData, } = useGetLectureByIdQuery(lectureId);
+
 
     const lecture = lectureData?.lecture ;
 
@@ -40,10 +42,10 @@ const LectureTab = () => {
         if (lecture) {
             setLectureTitle(lecture.lectureTitle);
             setIsFree(lecture.isPreviewFree);
-            setUploadVideoInfo(lecture.videoInfo)
+            setUploadVideoInfo(lecture.videoUrl)
         }
     }, [lecture])
-
+ 
 
     const fileChangeHandler = async (e) => {
         const file = e.target.files[0];
@@ -53,7 +55,7 @@ const LectureTab = () => {
             const formData = new FormData();
             formData.append("file", file);
             setMediaProgress(true);
-
+ 
             try {
                 const res = await axios.post(`${MEDIA_API}/upload-video`, formData, {
                     onUploadProgress: ({ loaded, total }) => {
@@ -85,20 +87,20 @@ const LectureTab = () => {
     };
 
     const editLectureHandler = async () => {
-        console.log({ lectureTitle, uploadVideInfo, isFree, courseId, lectureId });
+        console.log({ lectureTitle, uploadVideoInfo, isFree, courseId, lectureId });
 
-        await edtiLecture({
+        await editLecture({
             lectureTitle,
-            videoInfo: uploadVideInfo,
+            videoInfo: uploadVideoInfo,
             isPreviewFree: isFree,
-            courseId,
+            courseId, 
             lectureId,
         });
     };
 
     const navigate = useNavigate()
     const removeLectureHandler = async () => {
-        await removeLecture(lectureId);
+        await removeLecture({courseId, lectureId});
         navigate(`/admin/course/${courseId}/lecture`)
     }
 
@@ -113,7 +115,7 @@ const LectureTab = () => {
 
     useEffect(() => {
         if (removeSuccess) {
-            toast.success(removeData.message);
+            toast.success(removeData?.message);
         }
     }, [removeSuccess])
 
