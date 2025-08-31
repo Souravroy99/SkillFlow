@@ -10,15 +10,15 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { Switch } from "@/components/ui/switch";
-import { useEditLectureMutation, useGetLectureByIdQuery, useRemoveLectureMutation  } from "@/features/api/courseApi"; 
+import { useEditLectureMutation, useGetLectureByIdQuery, useRemoveLectureMutation } from "@/features/api/courseApi";
 import axios from "axios";
 import { Loader2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "sonner"; 
-  
+import { toast } from "sonner";
+
 const MEDIA_API = "http://localhost:7001/api/v1/media";
- 
+
 const LectureTab = () => {
     const [lectureTitle, setLectureTitle] = useState("");
     const [uploadVideoInfo, setUploadVideoInfo] = useState(null);
@@ -26,17 +26,17 @@ const LectureTab = () => {
     const [mediaProgress, setMediaProgress] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
     const [btnDisable, setBtnDisable] = useState(true);
-    
+
     const params = useParams();
     const { courseId, lectureId } = params;
 
     const [editLecture, { data, isLoading, error, isSuccess }] = useEditLectureMutation();
-    const [removeLecture, { data: removeData, isLoading: removeLoading,isSuccess: removeSuccess }] = useRemoveLectureMutation();
+    const [removeLecture, { data: removeData, isLoading: removeLoading, isSuccess: removeSuccess }] = useRemoveLectureMutation();
 
     const { data: lectureData, } = useGetLectureByIdQuery(lectureId);
 
 
-    const lecture = lectureData?.lecture ;
+    const lecture = lectureData?.lecture;
 
     useEffect(() => {
         if (lecture) {
@@ -45,17 +45,16 @@ const LectureTab = () => {
             setUploadVideoInfo(lecture.videoUrl)
         }
     }, [lecture])
- 
+
 
     const fileChangeHandler = async (e) => {
         const file = e.target.files[0];
 
-        if (file) 
-        {
+        if (file) {
             const formData = new FormData();
             formData.append("file", file);
             setMediaProgress(true);
- 
+
             try {
                 const res = await axios.post(`${MEDIA_API}/upload-video`, formData, {
                     onUploadProgress: ({ loaded, total }) => {
@@ -63,8 +62,7 @@ const LectureTab = () => {
                     },
                 });
 
-                if (res.data.success) 
-                {
+                if (res.data.success) {
                     console.log(res);
 
                     setUploadVideoInfo({
@@ -75,11 +73,11 @@ const LectureTab = () => {
                     setBtnDisable(false);
                     toast.success(res.data.message);
                 }
-            } 
+            }
             catch (error) {
                 console.log(error);
                 toast.error("video upload failed");
-            } 
+            }
             finally {
                 setMediaProgress(false);
             }
@@ -93,14 +91,14 @@ const LectureTab = () => {
             lectureTitle,
             videoInfo: uploadVideoInfo,
             isPreviewFree: isFree,
-            courseId, 
+            courseId,
             lectureId,
         });
     };
 
     const navigate = useNavigate()
     const removeLectureHandler = async () => {
-        await removeLecture({courseId, lectureId});
+        await removeLecture({ courseId, lectureId });
         navigate(`/admin/course/${courseId}/lecture`)
     }
 

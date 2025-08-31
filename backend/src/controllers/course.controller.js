@@ -33,7 +33,6 @@ export const getCreatorCourses = async (req, res) => {
     }
 }
 
-
 export const editCourse = async (req, res) => {
     try {
         const { courseId } = req.params
@@ -64,7 +63,6 @@ export const editCourse = async (req, res) => {
             coursePrice,
             courseThumbnail: courseThumbnail?.url
         }
-
 
         const updatedCourse = await Course.findByIdAndUpdate(courseId, updateData, { new: true })
 
@@ -110,5 +108,24 @@ export const togglePublishCourse = async (req, res) => {
     }
     catch (error) {
         return res.status(500).json({ success: false, message: "Failed to update status" })
+    }
+}
+
+export const getPublishCourses = async(req, res) => {
+    try {
+        
+        const courses = await Course.find({ isPublished: true }).populate({path: "creator", select: "name photoUrl"}) 
+        
+
+        if(!courses || courses.length === 0) {
+            return res.status(404).json({ success: false, message: "No course found!" })
+        }
+
+        return res.status(200).json({ success: true, message: "Published courses are found", courses })
+    } 
+    catch (error) {
+        console.error("Error in getPublishCourses:", error)
+
+        return res.status(500).json({ success: false, message: "Failed to fetch publish courses" })
     }
 }

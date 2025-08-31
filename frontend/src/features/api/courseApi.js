@@ -46,6 +46,12 @@ export const courseApi = createApi({
                 body: {lectureTitle}
             })
         }), 
+        getPublishedCourses: builder.query({
+            query: () => ({
+                url: `/published-courses`,
+                method: "GET",
+            }),
+        }),         
         getCourseLectures: builder.query({
             query: (courseId) => ({
                 url: `/${courseId}/lecture`,
@@ -94,4 +100,5 @@ export const {
     useRemoveLectureMutation,
     useGetLectureByIdQuery,
     usePublishCourseMutation,
+    useGetPublishedCoursesQuery,
 } = courseApi

@@ -57,7 +57,7 @@ const Profile = () => {
     useEffect(() => {
         if (isSuccess) {
             refetch();
-            toast.success(data.message || "Profile updated.");
+            toast.success("Profile updated.");
         }
         if (isError) {
             toast.error(error.message || "Failed to update profile");

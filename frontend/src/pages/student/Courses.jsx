@@ -1,15 +1,22 @@
-import { Skeleton } from "@/components/ui/skeleton";
-import React from "react";
-import Course from "./Course";
-// import Course from "./Course";
-// import { useGetPublishedCourseQuery } from "@/features/api/courseApi";
+import { Skeleton } from "@/components/ui/skeleton"
+import React from "react"
+import Course from "./Course"
+import { useGetPublishedCoursesQuery } from "@/features/api/courseApi"
 
-const Courses = () => {
-    const isLoading = false
-    const courses = [1, 2, 3, 4, 5, 6,1,2]
-    //   const {data, isLoading, isError} = useGetPublishedCourseQuery();
+const Courses = () => { 
+    const {data, isLoading, isError, error} = useGetPublishedCoursesQuery()
 
-    //   if(isError) return <h1>Some error occurred while fetching courses.</h1>
+    console.log(error   , isLoading, isError);
+
+    if (isError) {
+        const message = error?.data?.message || "Some error occurred while fetching courses.";
+        return (
+            <div className="bg-gray-50 dark:bg-[#141414] min-h-[200px] flex items-center justify-center">
+            <h1 className="text-black-600 text-xl font-bold">{message}</h1>
+            </div>
+        );
+    }
+
 
     return (
         <div className="bg-gray-50 dark:bg-[#141414]">
@@ -22,18 +29,18 @@ const Courses = () => {
                             <CourseSkeleton />
                         ))
                     ) :
-                        courses.map((course, idx) =>
-                            <Course key={idx} />
+                        data?.courses.map((course, idx) =>
+                            <Course key={idx} course={course} />
                         )
                     } 
 
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Courses;
+export default Courses
 
 const CourseSkeleton = () => {
     return (
@@ -51,5 +58,5 @@ const CourseSkeleton = () => {
                 <Skeleton className="h-4 w-1/4" />
             </div>
         </div>
-    );
-};
+    )
+}

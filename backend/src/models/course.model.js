@@ -20,9 +20,9 @@ const courseSchema = new mongoose.Schema(
         courseThumbnail: String, // Thumbnail URL
         enrolledStudents: [
             // We can do 'populate' due to 'ref'
-            {
+            { 
                 type: mongoose.Schema.Types.ObjectId,
-                ref: "User"
+                ref: "User" 
             } 
         ], 
         lectures: [
