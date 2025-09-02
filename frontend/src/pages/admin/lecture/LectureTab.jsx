@@ -17,7 +17,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 
-const MEDIA_API = "https://skillflow-frontend.onrender.com/media";
+const MEDIA_API = "https://skillflow-backend.onrender.com/media";
 // const MEDIA_API = "http://localhost:7001/api/v1/media";
 
 const LectureTab = () => {
