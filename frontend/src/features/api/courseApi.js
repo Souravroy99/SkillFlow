@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const COURSE_API = "http://localhost:7001/api/v1/course/"
+const COURSE_API = "https://skillflow-frontend.onrender.com/course/"
+// const COURSE_API = "http://localhost:7001/api/v1/course/"
 
 export const courseApi = createApi({
     reducerPath: "courseApi",
