@@ -46,7 +46,7 @@ const CourseTab = () => {
     const { data: courseByIdData, isLoading: courseByIdLoading, refetch } =
         useGetCourseByIdQuery(courseId)
 
-    const [publishCourse, { }] = usePublishCourseMutation()
+    const [publishCourse, {}] = usePublishCourseMutation()
 
     useEffect(() => {
         refetch()
@@ -71,7 +71,7 @@ const CourseTab = () => {
     }, [courseByIdData])
 
     // console.log(input)
-    console.log(courseByIdData?.course.lectures.length);
+    // console.log(courseByIdData?.course.lectures.length);
 
     const [previewThumbnail, setPreviewThumbnail] = useState("")
     const navigate = useNavigate()
@@ -216,6 +216,8 @@ const CourseTab = () => {
                                         <SelectItem value="Docker">Docker</SelectItem>
                                         <SelectItem value="MongoDB">MongoDB</SelectItem>
                                         <SelectItem value="HTML">HTML</SelectItem>
+                                        <SelectItem value="CS Fundamental">CS Fundamental</SelectItem>
+                                        <SelectItem value="Oops">Oops</SelectItem>
                                     </SelectGroup>
                                 </SelectContent>
                             </Select>

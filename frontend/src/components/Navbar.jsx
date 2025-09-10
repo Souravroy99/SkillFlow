@@ -22,7 +22,7 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "./ui/sheet"
-// import { Separator } from "@radix-ui/react-dropdown-menu"
+import { Separator } from "@radix-ui/react-dropdown-menu"
 import { Link, useNavigate } from "react-router-dom"
 import { useLogoutUserMutation } from "@/features/api/authApi"
 import { toast } from "sonner"

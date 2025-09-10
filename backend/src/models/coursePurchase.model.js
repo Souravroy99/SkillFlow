@@ -5,7 +5,7 @@ const coursePurchaseSchema = new mongoose.Schema(
         courseId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Course",
-            required: true
+            required: true 
         },
         userId: {
             type: mongoose.Schema.Types.ObjectId,
@@ -31,4 +31,4 @@ const coursePurchaseSchema = new mongoose.Schema(
     }
 )
 
-const coursePurchase = mongoose.model("CoursePurchase", coursePurchaseSchema)
+export const coursePurchase = mongoose.model("CoursePurchase", coursePurchaseSchema) 

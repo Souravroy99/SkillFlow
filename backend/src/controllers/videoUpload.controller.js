@@ -5,7 +5,7 @@ export const uploadVideo = async(req, res) => {
         const videoLocalPath = req.file.path
         const result = await uploadOnCloudinary(videoLocalPath)
         
-        console.log(result);
+        console.log(`Video Controller: ${result}`);
 
         return res.status(200).json({ success: true, message: "Video uploaded successfully", data: result })    
     } 

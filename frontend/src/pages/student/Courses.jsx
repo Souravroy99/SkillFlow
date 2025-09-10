@@ -6,11 +6,11 @@ import { useGetPublishedCoursesQuery } from "@/features/api/courseApi"
 const Courses = () => { 
     const {data, isLoading, isError, error} = useGetPublishedCoursesQuery()
 
-    console.log(error   , isLoading, isError);
+    console.log(error, isLoading, isError);
 
     if (isError) {
         const message = error?.data?.message || "Some error occurred while fetching courses.";
-        return (
+        return ( 
             <div className="bg-gray-50 dark:bg-[#141414] min-h-[200px] flex items-center justify-center">
             <h1 className="text-black-600 text-xl font-bold">{message}</h1>
             </div>

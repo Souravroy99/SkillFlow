@@ -11,8 +11,11 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import BuyCourseButton from "@/components/BuyCourseButton";
+import { useParams } from "react-router-dom";
 
 const CourseDetails = () => {
+    const params = useParams()
+    const courseId = params.courseId
     const purchaseCourse = true;
 
     return (
@@ -102,7 +105,7 @@ const CourseDetails = () => {
                             {purchaseCourse ? (
                                 <Button className="w-full">Continue Course</Button>
                             ) : (
-                                <BuyCourseButton />
+                                <BuyCourseButton courseId={courseId} />
                             )}
                         </CardFooter>
                     </Card>

@@ -27,9 +27,9 @@ const CreateLecture = () => {
         if (isSuccess) {
             refetch()
             toast.success(data?.message || "Lecture successfully created")
-        }
+        } 
         if (error) {
-            toast.error(error?.message || "Create lecture error")
+            toast.error(error.data?.message || "Create lecture error")
         }
     }, [isSuccess, error])
 

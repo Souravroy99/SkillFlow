@@ -31,7 +31,7 @@ const AddCourse = () => {
     };
 
     const createCourseHandler = async () => {
-        await createCourse({ courseTitle, category, coursePrice });
+        await createCourse({ courseTitle, category, coursePrice }); 
     };
 
     // For displaying toast
@@ -93,7 +93,9 @@ const AddCourse = () => {
                                 <SelectItem value="Python">Python</SelectItem>
                                 <SelectItem value="Docker">Docker</SelectItem>
                                 <SelectItem value="MongoDB">MongoDB</SelectItem>
-                                <SelectItem value="HTML">HTML</SelectItem>
+                                <SelectItem value="HTML">HTML</SelectItem> 
+                                <SelectItem value="CS Fundamental">CS Fundamental</SelectItem>
+                                <SelectItem value="Oops">Oops</SelectItem>
                             </SelectGroup>
                         </SelectContent>
                     </Select>

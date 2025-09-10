@@ -17,8 +17,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 
-const MEDIA_API = "https://skillflow-backend.onrender.com/media";
-// const MEDIA_API = "http://localhost:7001/api/v1/media";
+// const MEDIA_API = "https://skillflow-backend.onrender.com/media";
+const MEDIA_API = "http://localhost:7001/api/v1/media";
 
 const LectureTab = () => {
     const [lectureTitle, setLectureTitle] = useState("");
@@ -36,8 +36,9 @@ const LectureTab = () => {
 
     const { data: lectureData, } = useGetLectureByIdQuery(lectureId);
 
-
     const lecture = lectureData?.lecture;
+
+    console.log(lecture);
 
     useEffect(() => {
         if (lecture) {
@@ -161,7 +162,7 @@ const LectureTab = () => {
                     />
                 </div>
                 <div className="flex items-center space-x-2 my-5">
-                    <Switch checked={isFree} onCheckedChange={setIsFree} id="airplane-mode" />
+                    <Switch disabled={btnDisable} checked={isFree} onCheckedChange={setIsFree} id="airplane-mode" />
                     <Label htmlFor="airplane-mode">Is this video FREE</Label>
                 </div>
 

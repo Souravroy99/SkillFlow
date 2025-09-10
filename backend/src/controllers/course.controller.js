@@ -3,12 +3,12 @@ import { deleteMediaFromCloudinary, uploadOnCloudinary } from "../utils/cloudina
 
 export const createCourse = async (req, res) => {
     try {
-        const { courseTitle, category, } = req.body
+        const { courseTitle, category, coursePrice } = req.body
         if (!courseTitle || !category) {
             return res.status(400).json({ success: false, message: "Course title and category are required" })
         }
 
-        const course = await Course.create({ courseTitle, category, creator: req.user._id })
+        const course = await Course.create({ courseTitle, category, creator: req.user._id, coursePrice: coursePrice })
 
         return res.status(200).json({ success: true, message: "Course successfully created", course })
 
@@ -53,11 +53,12 @@ export const editCourse = async (req, res) => {
             }
             courseThumbnail = await uploadOnCloudinary(courseThumbnailLocalPath)
         }
-
+        
+        
         const updateData = {
             courseTitle,
-            subTitle,
-            description,
+            subTitle: subTitle ? subTitle : "",
+            description: description ? description : "",
             category,
             courseLevel,
             coursePrice,
@@ -65,6 +66,7 @@ export const editCourse = async (req, res) => {
         }
 
         const updatedCourse = await Course.findByIdAndUpdate(courseId, updateData, { new: true })
+
 
         return res.status(200).json({ success: true, message: "Course updated successfully", course: updatedCourse })
     }
@@ -113,10 +115,8 @@ export const togglePublishCourse = async (req, res) => {
 
 export const getPublishCourses = async(req, res) => {
     try {
-        
         const courses = await Course.find({ isPublished: true }).populate({path: "creator", select: "name photoUrl"}) 
         
-
         if(!courses || courses.length === 0) {
             return res.status(404).json({ success: false, message: "No course found!" })
         }

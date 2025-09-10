@@ -8,11 +8,11 @@ export const createLecture = async (req, res) => {
         const { lectureTitle } = req.body
 
         if (!courseId || !lectureTitle) {
-            return res.status(400).json({ success: false, message: "Lecture title and Course Id is required" })
+            return res.status(400).json({ success: false, message: "Lecture title is required" })
         }
 
         const lecture = await Lecture.create({ lectureTitle })
-
+ 
         // Option 1
         await Course.findByIdAndUpdate(
             courseId,
@@ -125,7 +125,7 @@ export const getLectureById = async (req, res) => {
         if (!lecture) {
             return res.status(404).json({ success: false, message: "No lecture exists" })
         }
-
+console.log(lecture);
         return res.status(200).json({ success: true, message: "Lecture found successfully", lecture })
     }
     catch (error) {

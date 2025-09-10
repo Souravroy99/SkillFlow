@@ -99,7 +99,7 @@ export const getUserProfile = async(req, res) => {
 
 export const updateProfile = async(req, res) => {
     try {
-        const { name } = req.body
+        let { name } = req.body
         const user = req.user
         const profilePhotoLocalPath = req.file?.path 
 
@@ -111,6 +111,10 @@ export const updateProfile = async(req, res) => {
         let photoRes ;
         if(profilePhotoLocalPath) {
             photoRes = await uploadOnCloudinary(profilePhotoLocalPath)
+        }
+
+        if(name === "") {
+            name = user?.name
         }
 
         const updateData = { name }
